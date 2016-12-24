@@ -1,0 +1,108 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h2 class="navbar-brand" style="color: white"><strong>CAS</strong> Cohort Cup Tracker</h2>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/rankings">Rankings</a></li>
+      {{#if user}}
+      <li><a href="/editor/points">Edit Points</a></li>
+      <li><a href="/editor/manage">Manage Cohorts</a></li>
+      <li><a href="/logout">Logout</a></li>
+      {{else}}
+      <li><a href="/login">Login</a></li>
+      {{/if}}
+    </ul>
+    <p class="user">
+      {{#if user}}
+      Logged in as <strong>{{user.username}}</strong>
+      {{/if}}
+    </p>
+  </div>
+</nav>
+
+<div class="page-head">
+  <h3>Here are our <strong>top 5 cohorts</strong> as of right now:</h3>
+</div>
+
+<div class="page-head-leaderboard" style="background-color:lightgray"> 
+  {{#each leaders}}
+    <h4 class="list"><strong>{{rank}}</strong> <div class="pill">{{name}}</div> <div class="pill" style="background-color: #66CCCC">#{{number}}</div><div class="pill" style="background-color: lightblue">{{cl}}</div> {{score}}pts</h4>
+  {{/each}}
+</div>
+
+<div class="page-head-total">
+  <h3>Total <strong>Cohort Cup</strong> points: <div class="pill" style="background-color: lightblue">{{total}}</div> Cohort Average: <div class="pill" style="background-color: lightblue">{{average}}</div> Number of Cohorts Above Average: <div class="pill" style="background-color: lightblue">{{aboveAverage}}</div></h3>
+</div>
+
+<canvas id="myChart" width="400" height="200" style="background-color: white"></canvas>
+
+<script>
+var ctx = document.getElementById("myChart");
+var labels = [];
+var backgroundColors = [];
+var borderColors = [];
+var chartData = [];
+
+for (var i = 1; i <= 44; i++){
+  labels.push(i);
+}
+
+{{#each scores}}
+  chartData.push({{this}});
+{{/each}}
+console.log(chartData);
+
+var topFiveCohorts = [0,0,0,0,0];
+var scoresCopy = chartData.slice();
+var maxScore = -1;
+var maxIndex = 0;
+for (var i = 0; i < 5; i++){
+    maxScore = scoresCopy[0];
+    maxIndex = 0;
+    for (var j = 0; j < scoresCopy.length; j++){
+        if (maxScore < scoresCopy[j]){
+            maxScore = scoresCopy[j];
+            maxIndex = j;
+        }
+    }
+    scoresCopy[maxIndex] = -2;
+    topFiveCohorts[i] = maxIndex + 1;
+}
+
+for (var i = 1; i <= 44; i++){
+  backgroundColors.push("rgba(176,224,230, 0.5)");
+}
+
+for (var i = 0; i < 5; i++){
+  backgroundColors[topFiveCohorts[i] - 1] = "rgba(138,43,226,0.5)";
+}
+
+for (var i = 1; i <= 44; i++){
+  borderColors.push("rgba(138,43,226,0.2)");
+}
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Cohort Cup Points',
+            data: chartData,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+

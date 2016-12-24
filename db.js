@@ -1,30 +1,33 @@
 var mongoose = require('mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
+
+var UserSchema = new mongoose.Schema({ });
+
+UserSchema.plugin(passportLocalMongoose);
   
 var Cohort = new mongoose.Schema({  
-	name: String,  
-	shortName: String,
-	cohortNum: Number,
-	cohortHashtag: String,
-	collegeLeaderName: String,
-	challengeScores: [Number],
-	eventScores: [Number],
+	cohortName: String,
+	cohortNumber: Number, 
+	clName: String,
 	totalScore: Number
-});  
+});
 
 var Challenge = new mongoose.Schema({  
 	name: String,
-	date: Number,
 	weekTheme: String,
 	cohortScores: [Number]
-});  
+});
 
 var Event = new mongoose.Schema({  
 	name: String,
-	date: Number,
 	cohortScores: [Number]
-});  
+});
 
 mongoose.model('Cohort', Cohort);
 mongoose.model('Challenge', Challenge);
 mongoose.model('Event', Event);
-mongoose.connect('mongodb://localhost/final-project');
+mongoose.model('User', UserSchema);
+
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect("mongodb://localhost/final-project");

@@ -1,0 +1,168 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h2 class="navbar-brand" style="color: white"><strong>CAS</strong> Cohort Cup Tracker</h2>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/rankings">Rankings</a></li>
+      <li class="active"><a href="/editor/points">Edit Points</a></li>
+      <li><a href="/editor/manage">Manage Cohorts</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+    <p class="user">
+      {{#if user}}
+      Logged in as <strong>{{user.username}}</strong>
+      {{/if}}
+    </p>
+  </div>
+</nav>
+
+<div class="page-head">
+  <h3>Add a <strong>Facebook Challenge</strong>, a <strong>Marquee Event</strong>, or individual points manually.</h3>
+</div>
+{{#if error}}
+<div class="error">
+  <h3 class="error">{{error}}</h3>
+</div>
+{{/if}}
+
+<div class="page-content">
+
+  <h2><div class="pill-large" style="background-color: lightblue">Facebook Challenges</div><br><br></h2>
+  <table class="table">
+    <thead style="background-color: lightblue">
+    <tr>
+      <th>Challenge Name</th>
+      <th>Week Theme</th> 
+      <th>Cohort Scores</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each challenges}}
+    <tr>
+      <th>{{name}}</th>
+      <th>{{weekTheme}}</th> 
+      <th>{{cohortScores}}</th>
+    </tr>
+    {{/each}}
+    </tbody>
+  </table>
+
+  <form method="POST" action="/parse-comments">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="name">Challenge Name</label>
+    <div class="col-sm-10"> 
+    <input class="form-control input-sm" name="name" type="text" placeholder="3-Day Weekend">
+    </div>
+  </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="weekTheme">Week Theme</label>
+    <div class="col-sm-10"> 
+    <input class="form-control input-sm" name="weekTheme" type="text" placeholder="#HumansOfNYU">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="comments" style="margin-top: 50px">Facebook Comments</label>
+    <div class="col-sm-10"> 
+    <textarea class="text" cols="115" rows ="10" name="comments" placeholder="  Sample data can be found below."></textarea>
+    <p id="passwordHelpBlock" class="form-text text-muted">
+      For some sample "Facebook Comments" input, copy/paste the data found at any of these links: <a href="/sample/3-day-weekend.txt">3-Day Weekend Challenge</a>, <a href="/sample/break.txt">Fall Break Challenge</a>, <a href="/sample/class.txt">Class Challenge</a>, <a href="/sample/clubs.txt">Clubs Challenge</a>, <a href="/sample/eat.txt">Food Challenge</a>.
+    </p>
+    <!-- <input class="form-control input-sm" name="comments" type="text"> -->
+    </div>
+  </div>
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Calculate Points" class="btn btn-default" style="margin-bottom: 100px; margin-top: 30px"></input>
+    </div>
+  </div>
+  </form>
+
+
+  <h2><div class="pill-large" style="background-color: #66CCCC">Marquee Events</div><br><br></h2>
+
+  <table class="table">
+    <thead style="background-color: #66CCCC">
+    <tr>
+      <th>Marquee Event Name</th>
+      <th>Cohort Scores</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each events}}
+    <tr>
+      <th>{{name}}</th>
+      <th>{{cohortScores}}</th>
+    </tr>
+    {{/each}}
+    </tbody>
+  </table>
+
+  <form method="POST" action="/add-event">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="eventName" style="margin-top: 30px">Event Name:</label>
+    <div class="col-sm-10"> 
+    <input class="form-control" name="eventName" type="text" style="margin-top: 30px" placeholder="Scholars Lecture Series">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cohortScores">Cohort Scores:</label>
+    <div class="col-sm-10"> 
+    <input class="form-control" name="cohortScores" type="text" placeholder="X, X, X, … , X">
+    <p id="passwordHelpBlock" class="form-text text-muted">
+      <br>Enter the cohort scores as a list of 44 comma separated values from the OrgSync attendance spreadsheet.
+    </p>
+    </div>
+  </div>
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Add Event" class="btn btn-default" style="margin-top: 30px; margin-bottom: 100px"></input>
+    </div>
+  </div>
+  </form>
+
+  <h2><div class="pill-large" style="background-color: #660099">Add Points</div></h2>
+
+  <form method="POST" action="/add-points">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cohortNumber" style="margin-top: 30px">Cohort Number:</label>
+    <div class="col-sm-10"> 
+    <input class="form-control" name="cohortNumber" type="text" style="margin-top: 30px" placeholder="1 - 44">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="toAdd">Points to Add:</label>
+    <div class="col-sm-10"> 
+    <input class="form-control" name="toAdd" type="text" placeholder="X points to add">
+    </div>
+  </div>
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Add Points" class="btn btn-default" style="margin-top: 30px; margin-bottom: 100px"></input>
+    </div>
+  </div>
+  </form>
+
+  <h2><div class="pill-large" style="background-color: #660099">Deduct Points</div></h2>
+
+  <form method="POST" action="/deduct-points">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="cohortNumber" style="margin-top: 30px">Cohort Number:</label>
+    <div class="col-sm-10"> 
+    <input class="form-control" name="cohortNumber" type="text" style="margin-top: 30px" placeholder="1 - 44">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="toRemove">Points to Remove:</label>
+    <div class="col-sm-10"> 
+    <input class="form-control" name="toRemove" type="text" placeholder="X points to remove">
+    </div>
+  </div>
+  <div class="form-group"> 
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" value="Deduct Points" class="btn btn-default" style="margin-top: 30px; margin-bottom: 30px"></input>
+    </div>
+  </div>
+  </form>
+
+</div>

@@ -1,8 +1,189 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body{
+	background-color: lightgray;
 }
 
-a {
-  color: #00B7FF;
+h1{
+	color: white;
+	font-family: Proxima Nova, sans-serif;
+	margin-bottom: 0px;
+	font-size: 60px;
+	text-align: center;
+}
+h2{
+	color: #660099;
+	font-family: Proxima Nova, sans-serif;
+	font-weight: normal;
+	font-size: 20px;
+	margin: 0px;
+	text-align: center;
+}
+h3{
+	color: white;
+	font-family: Proxima Nova, sans-serif;
+	font-weight: normal;
+	font-size: 20px;
+	text-align: center;
+}
+
+h4 {
+	text-align: center;
+}
+
+p{
+	color: #1d1d1d;
+	font-family: Proxima Nova, sans-serif;
+	margin-bottom: 0px;
+	font-size: 14px;
+	text-align: center;
+}
+
+div.transbox {
+  	margin: 30px;
+  	background-color: rgba(255,255,255,.7);
+  	border: .1px solid white;
+  	filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+.button {
+    background-color: #02a6ff;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.wrapper {
+	text-align: center;
+}
+
+table, th, td {
+   	border: 1px solid white;
+  	font-family: Proxima Nova, sans-serif;
+	margin-bottom: 0px;
+	color: #ffffff;
+}
+
+/*Header*/
+div.header{
+	color: white;
+	width:100%;
+	margin: 0 auto;
+	position: fixed;
+	top:0;
+	left:0;
+	background-color:#660099;
+}
+
+h1.title{
+	margin-bottom: 20px;
+}
+
+div.page-content {
+	padding-top: 50px;
+	padding-bottom: 150px;
+	text-align: center;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.purple-header {
+	color: #660099;
+	margin-bottom: 50px;
+}
+
+.navbar{
+	background-color: #660099;
+	color: white;
+}
+
+p.user {
+	font-weight: lighter;
+	color: white;
+	margin-top: 16px;
+	text-align: right;
+}
+
+div.navbar-header {
+	color: white;
+}
+
+div.page-head {
+	background-color: #66CCCC;
+	height: 120px;
+	padding-top: 55px;
+}
+
+div.page-head-leaderboard {
+	color: #660099;
+	height: 240px;
+	padding: 10px;
+	padding-left: 35%;
+}
+
+div.page-head-total {
+	background-color: #66CCCC;
+	height: 80px;
+	padding-top: 5px;
+	color: white;
+}
+
+h4.list {
+	text-align: left;
+}
+
+div.error{
+	height: 30px;
+	padding: 5px;
+}
+h3.error {
+	font-size: 16px;
+	color: red;
+}
+canvas {
+	padding: 50px;
+	height: 100%;
+}
+
+div.pill {
+    height: 30px;
+    color: white;
+    font-weight: bolder;
+    background-color: #BDA0CB;
+    border: 0px solid white;
+    display: inline-block;
+    padding-top: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2px;
+    border-radius: 10px; 
+}
+
+div.pill-large {
+	font-size: 40px;
+    height: 60px;
+    color: white;
+    font-weight: bolder;
+    background-color: #BDA0CB;
+    border: 1px solid white;
+    display: inline-block;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 2px;
+    border-radius: 10px; 
+}
+
+textarea {
+	border-radius: 5px;
+	border-color: lightgray;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	margin-bottom: 20px;
 }

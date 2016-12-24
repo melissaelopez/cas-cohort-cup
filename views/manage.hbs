@@ -1,0 +1,72 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h2 class="navbar-brand" style="color: white"><strong>CAS</strong> Cohort Cup Tracker</h2>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/rankings">Rankings</a></li>
+      <li><a href="/editor/points">Edit Points</a></li>
+      <li class="active"><a href="/editor/manage">Manage Cohorts</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+    <p class="user">
+      {{#if user}}
+      Logged in as <strong>{{user.username}}</strong>
+      {{/if}}
+    </p>
+  </div>
+</nav>
+
+<div class="page-head">
+  <h3>Here is the list of <strong>44 cohorts</strong>. You may edit their <strong>names</strong>, or <strong>CL</strong> at the bottom.</h3>
+</div>
+
+<div class="page-content">
+	<table class="table">
+		<thead style="background-color: darkgray">
+		<tr>
+			<th>#</th>
+			<th>Cohort Name</th>
+		    <th>College Leader</th> 
+		    <th>Total Score</th>
+		</tr>
+		</thead>
+		<tbody>
+		{{#each cohorts}}
+		<tr>
+			<th>{{cohortNumber}}</th>
+			<th>{{cohortName}}</th>
+		    <th>{{clName}}</th> 
+		    <th>{{totalScore}}</th>
+		</tr>
+		{{/each}}
+		</tbody>
+	</table>
+
+	<form method="POST" action="/add-cohort">
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="cohortNumber">Cohort Number:</label>
+		<div class="col-sm-10"> 
+		<input class="form-control" name="cohortNumber" type="text">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="cohortName">Cohort Name:</label>
+		<div class="col-sm-10">
+  		<input class="form-control" name="cohortName" type="text">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="clName">CL Name:</label>
+		<div class="col-sm-10"> 
+		<input class="form-control" name="clName" type="text">
+		</div>
+	</div>
+	<div class="form-group"> 
+		<div class="col-sm-offset-2 col-sm-10">
+		  <input type="submit" value="Add Cohort" class="btn btn-default"></input>
+		</div>
+	</div>
+	</form>
+
+</div>
